@@ -1,0 +1,57 @@
+  syntax = "proto3";
+
+  option java_outer_classname = "GeneratePdfClass";
+  option java_package = "pdf.grpc.service";
+  option go_package = ".;api";
+
+  service GeneratePdf {
+    rpc CreatePdf1(CreatePdf1Request) returns (CreatePdf1Response) {};
+  }
+
+  message MensajeRequest{
+    string cortePDFAgentesParametro = 1;
+  }
+
+  message CreatePdf1Request{
+    CortePDFAgentes parametro = 1;
+  }
+
+  message CreatePdf1Response {
+    string message = 1;
+  }
+
+  message AgenteInfoM {
+    string NombreAgente = 1;
+    string Id = 2;
+    string Correo = 3;
+    string Telefono = 4;
+    string Direccion = 5;
+    ComisionAgenteResumenM ComisionAgenteResumen = 6;
+    repeated ComisionAgenteDetalleM ComisionAgenteDetalle = 7;
+  }
+
+  message ComisionAgenteResumenM {
+    float ComisionServicios = 1;
+    float ComisionProductoInsumo = 2;
+    float Subtotal = 3;
+    float Impuesto = 4;
+    float Total = 5;
+  }
+
+  message ComisionAgenteDetalleM {
+    string NombreServicio = 1;
+    float ComisionServicio = 2;
+    float ComisionInsumo = 3;
+    float Total = 4;
+  }
+
+  message CortePDFAgentes {
+    string Host = 1;
+    string DireccionPlataforma = 2;
+    string CorreoPlataforma = 3;
+    string NumeroPlataforma = 4;
+    string CorteId = 5;
+    string FechaGenercion = 6;
+    string Periodo = 7;
+    repeated AgenteInfoM AgenteInfo = 8;
+  }
